@@ -1,0 +1,347 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.emirates.com/pss/integration/xmlschemas/pnrcomplete/2013/09" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="pnrRetrieveResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="pnrResponse">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="header">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="snapShotDateTime">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="date"/>
+                                                    <xs:element type="xs:long" name="time"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="creator">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="recordLocator"/>
+                                        <xs:element name="transactionDetails">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:int" name="BCDTime"/>
+                                                    <xs:element type="xs:string" name="BCDCity"/>
+                                                    <xs:element type="xs:string" name="BCDDate"/>
+                                                    <xs:element type="xs:string" name="dutyCode"/>
+                                                    <xs:element type="xs:string" name="agentInitials"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element type="xs:string" name="isGroupBooking"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="travelAgency">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:int" name="number"/>
+                                        <xs:element type="xs:string" name="name"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="pointOfSale">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="POSType"/>
+                                        <xs:element type="xs:string" name="RLOCType"/>
+                                        <xs:element type="xs:string" name="carrier"/>
+                                        <xs:element type="xs:string" name="PNRAddress"/>
+                                        <xs:element type="xs:string" name="pseudoCityCode"/>
+                                        <xs:element type="xs:int" name="agencyNumber"/>
+                                        <xs:element type="xs:string" name="geoCity"/>
+                                        <xs:element type="xs:string" name="geoCountry"/>
+                                        <xs:element type="xs:string" name="agentDutyCode"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="owner">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="hostCarrier"/>
+                                        <xs:element type="xs:byte" name="agencyID"/>
+                                        <xs:element type="xs:string" name="cityCode"/>
+                                        <xs:element type="xs:string" name="agentInitials"/>
+                                        <xs:element type="xs:string" name="dutyCode"/>
+                                        <xs:element type="xs:string" name="lastUpdateDate"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="passengers">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Passenger" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:byte" name="headCount"/>
+                                                    <xs:element type="xs:string" name="passengerType" minOccurs="0"/>
+                                                    <xs:element type="xs:string" name="passengerFullName"/>
+                                                    <xs:element name="individualName" minOccurs="0">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element type="xs:string" name="lastName"/>
+                                                                <xs:element type="xs:string" name="firstName"/>
+                                                                <xs:element type="xs:string" name="title"/>
+                                                                <xs:element type="xs:string" name="fullName"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="itineraries">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="airSegments">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="airsegment" maxOccurs="unbounded" minOccurs="0">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element type="xs:byte" name="number"/>
+                                                                <xs:element name="segmentType">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="ITNType"/>
+                                                                            <xs:element type="xs:byte" name="segmentType"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element type="xs:string" name="linkedSegment"/>
+                                                                <xs:element type="xs:string" name="operationalRMarketingSegment"/>
+                                                                <xs:element type="xs:string" name="hostCarrier"/>
+                                                                <xs:element type="xs:short" name="flightNumber"/>
+                                                                <xs:element type="xs:string" name="serviceClass"/>
+                                                                <xs:element type="xs:string" name="reservationClass"/>
+                                                                <xs:element type="xs:string" name="inventoryClass"/>
+                                                                <xs:element type="xs:string" name="departureDate"/>
+                                                                <xs:element type="xs:short" name="departureTime"/>
+                                                                <xs:element type="xs:string" name="departureCity"/>
+                                                                <xs:element type="xs:string" name="arrivalCity"/>
+                                                                <xs:element type="xs:string" name="bookingStatus"/>
+                                                                <xs:element type="xs:byte" name="numberInParty"/>
+                                                                <xs:element type="xs:short" name="arrivalTime"/>
+                                                                <xs:element type="xs:string" name="isDateChangeFlight"/>
+                                                                <xs:element type="xs:string" name="isInfoSegment"/>
+                                                                <xs:element type="xs:string" name="isFQTVSpecificFlag"/>
+                                                                <xs:element type="xs:string" name="controllingCarrier"/>
+                                                                <xs:element name="additionalInfo">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:byte" name="marriageSeqNumber"/>
+                                                                            <xs:element type="xs:byte" name="dateDiscrepancyOfFlight" minOccurs="0"/>
+                                                                            <xs:element type="xs:string" name="flownStatus"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="ARUNKSegments">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="ARUNKSegment">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element type="xs:byte" name="number"/>
+                                                                <xs:element name="segmentType">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="ITNType"/>
+                                                                            <xs:element type="xs:byte" name="segmentType"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element type="xs:string" name="isFlownStatus"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="groupInfo">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:byte" name="numberOfIndividuals"/>
+                                        <xs:element type="xs:string" name="journeyType"/>
+                                        <xs:element type="xs:string" name="BCDCurrency"/>
+                                        <xs:element type="xs:short" name="BCDRevenueSale"/>
+                                        <xs:element type="xs:string" name="BCDNETCity"/>
+                                        <xs:element type="xs:string" name="BCDNETCarrier"/>
+                                        <xs:element name="groupCustomerType">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="groupType"/>
+                                                    <xs:element type="xs:short" name="customerType"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element type="xs:string" name="travelFlexibility"/>
+                                        <xs:element type="xs:string" name="GRMSHostCarrier"/>
+                                        <xs:element type="xs:string" name="GRMSLocalCurrency"/>
+                                        <xs:element type="xs:short" name="GRMSQuotedFare"/>
+                                        <xs:element type="xs:float" name="GRMSExchangeRate"/>
+                                        <xs:element type="xs:string" name="GRMSDateOfConversion"/>
+                                        <xs:element name="masterGroupCustomer">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="customerType"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="facts">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="generalFacts">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="generalServiceRequests">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="generalServiceRequest">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="factType"/>
+                                                                            <xs:element type="xs:string" name="serviceType"/>
+                                                                            <xs:element type="xs:string" name="serviceCode"/>
+                                                                            <xs:element type="xs:string" name="hostCarrier"/>
+                                                                            <xs:element type="xs:string" name="variableData"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="remarks">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="confidentialRemarks">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="confidentialRemark" maxOccurs="unbounded" minOccurs="0">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="transactionDetails">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="BCDTime"/>
+                                                                            <xs:element type="xs:string" name="BCDCity"/>
+                                                                            <xs:element type="xs:string" name="BCDDate"/>
+                                                                            <xs:element type="xs:string" name="dutyCode"/>
+                                                                            <xs:element type="xs:string" name="agentInitials"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element type="xs:string" name="HAIDOfCreator"/>
+                                                                <xs:element type="xs:byte" name="numberOfAddressee"/>
+                                                                <xs:element type="xs:string" name="variableData"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="agentRemarks">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="agentRemark" maxOccurs="unbounded" minOccurs="0">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="transactionDetails">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:int" name="BCDTime"/>
+                                                                            <xs:element type="xs:string" name="BCDCity"/>
+                                                                            <xs:element type="xs:string" name="carrier"/>
+                                                                            <xs:element type="xs:string" name="BCDDate"/>
+                                                                            <xs:element type="xs:string" name="agentInitials"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element type="xs:string" name="variableData"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="timeLimits">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="timeLimit" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="transactionDetails">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element type="xs:short" name="BCDTime"/>
+                                                                <xs:element type="xs:string" name="BCDCity"/>
+                                                                <xs:element type="xs:string" name="carrier"/>
+                                                                <xs:element type="xs:string" name="BCDDate"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element type="xs:byte" name="queueNumber"/>
+                                                    <xs:element type="xs:string" name="variableData"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="recordLocators">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="recordLocator">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="number"/>
+                                                    <xs:element name="transactionDetails">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element type="xs:string" name="BCDCity"/>
+                                                                <xs:element type="xs:string" name="carrier"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element type="xs:string" name="variableData"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

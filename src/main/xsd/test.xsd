@@ -1,0 +1,2642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 rel. 2 (http://www.altova.com) by XMLSpy 2013 Professional Ed. Release 2, Installed for 109 users (with SMP from 2013-09-05 to 2014-01-04) (Health Care Service Corp) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:x2262="http://www.hcsc.com/dmih/X2262" targetNamespace="http://www.hcsc.com/dmih/X2262" elementFormDefault="qualified" version="v1_0_0_0">
+	<xs:element name="Action">
+		<xs:complexType>
+			<xs:sequence minOccurs="0">
+				<xs:element ref="x2262:Key" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="type" type="x2262:ActionTypes" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ActionInfo">
+		<xs:complexType>
+			<xs:all minOccurs="0">
+				<xs:element ref="x2262:Admin" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Processing instructions for use by the HPS Admin system</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Actions" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="x2262:Action" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Actions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="x2262:Action" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Admin">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="LoadIssueCode" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Indicates whether to build and / or issue the Case.  May also contain EDI 834 Maintenance Reason Code values.  The Internal (HPS) "Load and Issue" values are:
+						*  "HLD":  Load Only
+						*  "HLI":  Load and Issue
+						*  "HLC":  Load and Cancel
+						*  "HIS":  Issue Only
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Broker">
+		<xs:complexType>
+			<xs:choice minOccurs="0">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string" minOccurs="0"/>
+					<xs:element name="FirstName" type="xs:string" minOccurs="0"/>
+					<xs:element name="LastName" type="xs:string" minOccurs="0"/>
+					<xs:element name="Company" type="xs:string" minOccurs="0"/>
+					<xs:element name="Email" type="xs:string" minOccurs="0"/>
+					<xs:element name="Phone" type="xs:string" minOccurs="0"/>
+					<xs:element name="Fax" type="xs:string" minOccurs="0"/>
+					<xs:element name="BrokerType" type="xs:string" minOccurs="0"/>
+					<xs:element name="Signature" type="xs:string" minOccurs="0"/>
+					<xs:element name="SignatureDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="CommissionPercentage" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Percent of commission split per product.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="x2262:BrokerAddress" minOccurs="0"/>
+					<xs:element name="ExtendedInfo" type="x2262:ExtendedInfoType" minOccurs="0"/>
+					<xs:element name="AncillaryIds" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Alternate identifiers for the Broker (outside of Broker ID)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:simpleContent>
+											<xs:extension base="xs:string">
+												<xs:attribute name="type" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="AccountExecNumber">
+																<xs:annotation>
+																	<xs:documentation>Identifies the Account Executive</xs:documentation>
+																</xs:annotation>
+															</xs:enumeration>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:extension>
+										</xs:simpleContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>HPS Broker ID as defined in the BROKER table</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ffeId" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Federally-Facilitated Exchange Broker ID</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="npnId" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>National Insurance Producer Registry (NIPR) Broker ID</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="tpaAccountNum" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Third Party Administrator Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="affiliateCode" type="xs:string" use="optional"/>
+			<xs:attribute name="EffectiveDate"/>
+			<xs:attribute name="TerminationDate"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BrokerAddress">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Addressee" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Addressee identifier/name CHAR(255)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Street1" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Street address line 1 CHAR(30) "4641 Gulfside Cir"</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Street2" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Street address line 2 CHAR(30) "# 134"</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="City" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>City CHAR(30) "Tampa","Paris"</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="County" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Address County CHAR(30) "Hillsborough","Broward"</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="CountyCode" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Code identifying the County - e.g, "36061"</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="locationQualifier" use="optional">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="60">
+												<xs:annotation>
+													<xs:documentation>EDI 834 value for "Area"</xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+											<xs:enumeration value="CY">
+												<xs:annotation>
+													<xs:documentation>EDI 834 value for "County or Parish"</xs:documentation>
+												</xs:annotation>
+											</xs:enumeration>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="State" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Address state CHAR(2)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="CountryCode" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Address Country Abbreviation</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="CountrySubdivisionCode" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Use the country subdivision codes from Part 2 of ISO 3166.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Zip" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Address zipcode "33624"</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ZipExt" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Zipcode plus four "4231"</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="PostalCode" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Used for international addresses.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="type" type="x2262:HPSAddressType" use="required">
+				<xs:annotation>
+					<xs:documentation>Describes Mailing, Billing</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="id" type="xs:int" use="optional"/>
+			<xs:attribute name="overrideAddress" type="x2262:YesNoType" use="optional">
+				<xs:annotation>
+					<xs:documentation>'Y': Override Address validation; 'N': Don't override - allow Address to be corrected</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="preferred" type="x2262:YesNoType" use="optional">
+				<xs:annotation>
+					<xs:documentation>Indicates whether or not this is the customer's desired method of communication.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="HPSAddressType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HOME"/>
+			<xs:enumeration value="home"/>
+			<xs:enumeration value="WORK"/>
+			<xs:enumeration value="work"/>
+			<xs:enumeration value="BILLING"/>
+			<xs:enumeration value="billing"/>
+			<xs:enumeration value="MAILING"/>
+			<xs:enumeration value="mailing"/>
+			<xs:enumeration value="ALTERNATE"/>
+			<xs:enumeration value="alternate"/>
+			<xs:enumeration value="CONFIDENTIAL"/>
+			<xs:enumeration value="confidential"/>
+			<xs:enumeration value="OTHER"/>
+			<xs:enumeration value="other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="BrokerInfo" nillable="true">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="x2262:Broker" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EnrollmentInfo" nillable="true">
+		<xs:complexType>
+			<xs:all minOccurs="0">
+				<xs:element name="DentalAttestation" minOccurs="0"/>
+				<xs:element name="DependentType" minOccurs="0"/>
+				<xs:element name="SrcSenderID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>New 03-15 HPS. Unique ID assigned by Sender</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="EnrollmentByProxy" type="xs:string" minOccurs="0"/>
+				<xs:element name="ExternalCustomerID" minOccurs="0"/>
+				<xs:element name="ExchangeSubscriberId" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>ID assigned by the Exchange to identify the subscriber
+Do we need to track this? VAS has this field</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="EnrollmenMethodType" type="xs:string" default="WEB" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Default 'WEB'</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ExternalPolicyID" minOccurs="0"/>
+				<xs:element name="SrcSysTypeId" type="xs:string" minOccurs="0"/>
+				<xs:element name="TaxIdNumber" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>N101 = BO (Broker or Sales Office)
+N103 = 94 (code assigned by the organization)
+N103 = FI (Federal taxpayer identification number)
+N103 = XV (CMS Planid)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ExternalPolicyEndDate" minOccurs="0"/>
+				<xs:element name="ExternalPolicyStartDate" minOccurs="0"/>
+				<xs:element name="WritingAgentNumber" minOccurs="0"/>
+				<xs:element name="HmoDisclosure" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Y/N Indicator</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ReceivedDate" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Date application was received  from shopping cart or Exchange </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SourceExchangeId" minOccurs="0"/>
+				<xs:element name="QuotePayPeriod" minOccurs="0"/>
+				<xs:element name="QuoteFeeDescr" minOccurs="0"/>
+				<xs:element name="QuoteFeeID" minOccurs="0"/>
+				<xs:element name="QuoteNimbusNum" minOccurs="0"/>
+				<xs:element name="QuoteDate" minOccurs="0"/>
+				<xs:element name="QuoteID" minOccurs="0"/>
+				<xs:element name="QuoteRateRef" minOccurs="0"/>
+				<xs:element name="QuoteTotal" minOccurs="0"/>
+				<xs:element name="QuoteTotalDeduction" minOccurs="0"/>
+				<xs:element name="QuoteTotalFee" minOccurs="0"/>
+				<xs:element name="QuoteTotalPremium" minOccurs="0"/>
+				<xs:element name="DependentCount" minOccurs="0"/>
+				<xs:element name="ClientApplicationID" minOccurs="0"/>
+				<xs:element name="CaseNameCIM" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The CIM number uniquely identifies the application</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ExchangeCaseNumber" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>HPS ILB CaseNumber</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="PaymtConfirmationNbr" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Payment Transaction Confiirmation Number </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="E_Consent" type="x2262:YesNoType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Y/N Subscriber Consent to electronic communications</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Key">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="type" use="optional">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="id"/>
+								<xs:enumeration value="dbEnrolleeId"/>
+								<xs:enumeration value="prodType"/>
+								<xs:enumeration value="covEntity"/>
+								<xs:enumeration value="planId"/>
+								<xs:enumeration value="cim"/>
+								<xs:enumeration value="caseNum"/>
+								<xs:enumeration value="ssn"/>
+								<xs:enumeration value="classCaseNum"/>
+								<xs:enumeration value="planIdCrossReference"/>
+								<xs:enumeration value="classCim"/>
+								<xs:enumeration value="dataPointName"/>
+								<xs:enumeration value="oldValue"/>
+								<xs:enumeration value="newValue"/>
+								<xs:enumeration value="effectiveDate"/>
+								<xs:enumeration value="terminationDate"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MembershipTrx" type="x2262:MembershipTrxType">
+		<xs:annotation>
+			<xs:documentation>Membership Transaction</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AddressType">
+		<xs:all>
+			<xs:element name="StreetAddressLine1" type="xs:string"/>
+			<xs:element name="StreetAddressLine2" type="xs:string" minOccurs="0"/>
+			<xs:element name="StreetAddressLine3" type="xs:string" minOccurs="0"/>
+			<xs:element name="StreetAddressLine4" type="xs:string" minOccurs="0"/>
+			<xs:element name="City" type="xs:string" minOccurs="0"/>
+			<xs:element name="State" type="xs:string" minOccurs="0"/>
+			<xs:element name="PostalCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="County" type="xs:string" minOccurs="0"/>
+			<xs:element name="CountryCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CountryName" type="xs:string" minOccurs="0"/>
+			<xs:element name="SecondUnitNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="Longitude" type="xs:string" minOccurs="0"/>
+			<xs:element name="Latitude" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddrSeqNbr" type="xs:string" minOccurs="0"/>
+			<xs:element name="CNTYssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="ForeignProvinceName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ForeignStateName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ForeignPostalCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastUpdateTS" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastChangeUserID" type="xs:string" minOccurs="0"/>
+			<!--
+		Loc SSNK 
+		City^Stat^PostalCode^County^CountryCode^StreetAddressLine1^StreetAddressLine2^StreetAddressLine3^SecondUnitNumber
+		-->
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="AddressUsageListType">
+		<xs:sequence>
+			<xs:element name="AddressUsageType" type="x2262:AddressUsageType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressUsageType">
+		<xs:all>
+			<xs:element name="LocationUsageCode" type="xs:string" minOccurs="0"/>
+			<!-- UsageCode: "LOCATION USAGE CODE" PR,SC,BILL,MAIL ETC -->
+			<xs:element name="Address" type="x2262:AddressType" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="LocationUsageIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="CallIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYLOCUSGSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYLOCUSGssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="PTYLOCSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYLOCssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="PTYLOCUSGFRGNEXTNSNSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYLOCUSGFRGNEXTNSNssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="PTYLOCUSGSrcLcts" type="xs:string" minOccurs="0"/>
+			<!-- Source last updated timestamp -->
+			<xs:element name="PTYLOCSrcLcts" type="xs:string" minOccurs="0"/>
+			<!-- Source last updated timestamp -->
+			<xs:element name="PTYLOCUSGFRGNEXTNSNSrcLcts" type="xs:string" minOccurs="0"/>
+			<!-- Source last updated timestamp -->
+			<xs:element name="PartyLocationCharacteristics" type="x2262:PartyLocationCharacteristicsListType" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="useAuthorized">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value=""/>
+					<xs:enumeration value="Y"/>
+					<xs:enumeration value="N"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ClientBillingProfileDetails">
+		<xs:all>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="BankRoutingNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="BankAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="BankAccountType" type="xs:string" minOccurs="0"/>
+			<xs:element name="BillFrequencyCode" type="xs:string" minOccurs="0"/>
+			<!-- "BILL FREQUENCY CODE" -->
+			<xs:element name="BillTypeCode" type="xs:string" minOccurs="0"/>
+			<!-- "BILL TYPE CODE" -->
+			<xs:element name="BillStopEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="BillStopEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ListBillPayorAccountIdentifier" type="xs:string" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="ClientBillingProfileListType">
+		<xs:sequence>
+			<xs:element name="ClientBillingProfileDetails" type="x2262:ClientBillingProfileDetails" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClientType">
+		<xs:all>
+			<xs:element name="ClientPartyKeyType" type="xs:string"/>
+			<xs:element name="ClientPartySourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="CorporateEntityCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="AccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupClientName" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupClientSearchName" type="xs:string" minOccurs="0"/>
+			<xs:element name="OrganizationTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ClientStatusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="OriginalEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ClientEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ClientEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ClientEndReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="OpenEnrollmenBeginDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="OpenEnrollmentEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="OpenEnrollmentTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupClientRenewalDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupClientRunInDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PremiumBillingDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MarketSegmentCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SicCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="TefraAppliedIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="CobraAutoCancelTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="DependentInformationRequiredCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MSPCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="NewEmployeeWaitingPeriodTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="RembmtRiderTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="RenewalMonthNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupClientCancelInitiatingLevelCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupClientRetentionCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="Rule500Indicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="AutomatedEligibilityProcessingIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="BlueAccountEmployerIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="BlueAccountMemberIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="EmployerContributionTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SehiraIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="StopMemberChangeReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubscriberAddressMaintenanceIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="ThirdPartyEOBIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="BlueCardExclusionIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="BluestarBillingIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="InitialEnrollmentCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ClientSourceCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="BlueStarConversionDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="BluestarMemberActivationIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberConversionDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EINNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="CobraBillingTypecode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageContinuedtypecode" type="xs:string" minOccurs="0"/>
+			<xs:element name="FulTimeEmployeeCount" type="xs:string" minOccurs="0"/>
+			<xs:element name="PartTimeEmployeeCount" type="xs:string" minOccurs="0"/>
+			<xs:element name="SmltdConversionEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="GenrSubIdCd" type="xs:string" minOccurs="0"/>
+			<!-- xs:element name="LegacySystemName" type="xs:string" minOccurs="0" maxOccurs="1"/ -->
+			<xs:element name="LastUpdateTS" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastChangeUserID" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYKEYMGMTSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYNMSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="CLNTSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="CLNTssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<!-- applies to PKM, PTY, PTY_NM, CLNT -->
+			<xs:element name="PreviousCoverageInd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If 'Y' is present this indicates the Application is comprised of coverage data from another system. (i.e. is conversion data)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FulfillmentType" type="xs:string" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementElementDescriptorListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementElementDescriptor" type="x2262:CoverageAgreementElementDescriptorType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementElementDescriptorType">
+		<xs:all>
+			<xs:element name="CoverageAgreementElementDescriptorCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementDescriptorEndReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementDescriptorEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementDescriptorEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTELEDESCRSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTELEDESCRssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementElementListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementElement" type="x2262:CoverageAgreementElementType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementElementType">
+		<xs:all>
+			<xs:element name="BenefitAgreementCoverageSequenceNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementEndReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageFundTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CAPCCancelReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementProductComponentEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementProductComponentEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PackageCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageElements" type="x2262:CoverageElementListType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementHistoryListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementHistory" type="x2262:CoverageAgreementHistoryType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementHistoryType">
+		<xs:all>
+			<xs:element name="SitusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExtraTerritoryRuleCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="BenefitAgreementHistorySequenceNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementHistoryEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SourceLastUpdatedTimestamp" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTELEHISTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTELEHISTssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreement" type="x2262:CoverageAgreementType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementMedicareElementListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementMedicareElement" type="x2262:CoverageAgreementMedicareElementType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementMedicareElementType">
+		<xs:all>
+			<xs:element name="CoverageAgreementElementMedicareCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementMedicareEndReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementDescriptorEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElementDescriptorEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTMCAREELESrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTMCAREELEssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementProductComponentCompositionListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementProductComponentComposition" type="x2262:CoverageAgreementProductComponentCompositionType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementProductComponentCompositionType">
+		<xs:all>
+			<xs:element name="ElementDescriptorCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageElementCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTPRODCOMPNTCMPSTNSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTPRODCOMPNTCMPSTNssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementProductComponentListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementProductComponent" type="x2262:CoverageAgreementProductComponentType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementProductComponentType">
+		<xs:all>
+			<xs:element name="CoverageAgreementProductComponentEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementProductComponentEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementProductComponentCancelReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PackageCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="VendorPartyKeyType" type="xs:string" minOccurs="0"/>
+			<!-- 'Vendor' -->
+			<xs:element name="VendorPartySourceKey" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="PRODCOMPNTssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTPRODCOMPNTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTPRODCOMPNTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="CoverageAgreementProductComponentCompositions" type="x2262:CoverageAgreementProductComponentCompositionListType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementRenewalHistoryListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementRenewalHistory" type="x2262:CoverageAgreementRenewalHistoryType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementRenewalHistoryType">
+		<xs:all>
+			<xs:element name="RenewalDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="RenewalEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SystemEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SystemEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTRNWLHISTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTRNWLHISTssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementType">
+		<xs:all>
+			<xs:element name="ContractKeyType" type="xs:string"/>
+			<xs:element name="ContractSourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="CONTRKEYMGMTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="CONTRKEYMGMTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="ClientPartyKeyType" type="xs:string" minOccurs="0"/>
+			<!-- 'CLIENT','VMS CLIENT' etc.. -->
+			<xs:element name="ClientPartySourceKey" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="BenefitAgreementNumber" type="xs:string" minOccurs="0"/>
+			<!-- BEN_AGMT_NBR for bluestar -->
+			<xs:element name="ASOIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="AutomaticCertificationCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="BAUserDisplayNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementHippaCompletionDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementNtlAnniversaryEffDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CertificationLeadDays" type="xs:string" minOccurs="0"/>
+			<xs:element name="CorporateProductNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementStatusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageEndReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageEndReasonCodeEntityCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageEndReasonCodeIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="DepartmentNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="DependentInformationRequiredIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="DrugBlueScriptCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ERISACode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ERISAPlanYearNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalAddDayCount" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalCancelDayCount" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExtraTerritoryRuleCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExtraTerritoryRuleEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="FundingTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="GrandfatherStatusEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="GrandfatherStatusIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupCoverageAgreementEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupCoverageAgreementEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="HCAProratedRuleCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="HIPAAStatusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="IncentivePublicIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="LineOfBusinessCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MaternityBenefitCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicareEstimationEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicareEstimationIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="NetworkCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PCPGracePeriodDayCount" type="xs:string" minOccurs="0"/>
+			<xs:element name="PlanName" type="xs:string" minOccurs="0"/>
+			<xs:element name="PolicyTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProductCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProviderSelectionRequiredCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="RenewalDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="RunInEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="RunInStartDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="RunOutEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="RunOutStartDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="StudentCertificationResponseCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ScheduleCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ShareAccumulationIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="ShareAccumulationVendorPartyIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="SitusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SitusCodeEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubNetworkCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubscriberLevelBillingIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="SupplementaryInsuranceTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="TierStructureName" type="xs:string" minOccurs="0"/>
+			<xs:element name="VBIDIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="CoverageAgreementHistories" type="x2262:CoverageAgreementHistoryListType" minOccurs="0"/>
+			<xs:element name="CoverageAgreementRenewalHistories" type="x2262:CoverageAgreementRenewalHistoryListType" minOccurs="0"/>
+			<xs:element name="CoverageAgreementURERates" type="x2262:CoverageAgreementURERateListType" minOccurs="0"/>
+			<xs:element name="CoverageAgreementElements" type="x2262:CoverageAgreementElementListType" minOccurs="0"/>
+			<xs:element name="PackageCoverageAgreementProductComponents" type="x2262:CoverageAgreementProductComponentListType" minOccurs="0"/>
+			<!-- BEN_AGMT_CVG_PKG -->
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementURERateListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementURERate" type="x2262:CoverageAgreementURERateType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementURERateType">
+		<xs:all>
+			<xs:element name="UREAreaNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="URERateEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="URERateEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MarketSegmentCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MarketingPlanNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTURERTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTURERTssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementWaitingPeriodListType">
+		<xs:sequence>
+			<xs:element name="CoverageAgreementWaitingPeriod" type="x2262:CoverageAgreementWaitingPeriodType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageAgreementWaitingPeriodType">
+		<xs:all>
+			<xs:element name="WaitingPeriodTypeCode" type="xs:string"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="WaitingPeriodCompletionDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="HippaDocc" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSHPCOVRGELEWAITGPRDSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPCOVRGELEWAITGPRDssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageElementDescriptorListType">
+		<xs:sequence>
+			<xs:element name="CoverageElementDescriptor" type="x2262:CoverageElementDescriptorType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageElementDescriptorType">
+		<xs:all>
+			<xs:element name="CoverageElementDescriptorCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageElementDescriptorText" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageElementDescriptorEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageElementDescriptorEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGELEDESCRSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGELEDESCRssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="CoverageAgreementElementDescriptors" type="x2262:CoverageAgreementElementDescriptorListType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageElementListType">
+		<xs:sequence>
+			<xs:element name="CoverageElement" type="x2262:CoverageElementType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageElementType">
+		<xs:all>
+			<xs:element name="CoverageElementCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageElementName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ParentCoverageElementIdentifier" type="xs:string" minOccurs="0"/>
+			<!-- ??? -->
+			<xs:element name="PRODCOMPNTssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="COVRGELESrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGELEssnk" type="x2262:KeyGroupType"/>
+			<!--COVRG_AGRMT_PROD_COMPNT - BEN_AGMT_CVG  -->
+			<xs:element name="VendorPartyKeyType" type="xs:string" minOccurs="0"/>
+			<!-- 'Vendor' -->
+			<xs:element name="VendorPartySourceKey" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTPRODCOMPNTSrcRecStsCd" type="xs:string"/>
+			<!-- BEN_AGMT_CVG   -->
+			<xs:element name="COVRGAGRMTPRODCOMPNTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="COVRGAGRMTELESrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGAGRMTELEssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="CoverageElementDescriptors" type="x2262:CoverageElementDescriptorListType" minOccurs="0"/>
+			<xs:element name="CoverageAgreementMedicareElements" type="x2262:CoverageAgreementMedicareElementListType" minOccurs="0"/>
+			<!--COVRG_AGRMT_PROD_COMPNT - BEN_AGMT_VEND  -->
+			<xs:element name="VendorCoverageAgreementProductComponents" type="x2262:CoverageAgreementProductComponentListType" minOccurs="0"/>
+			<!-- BEN_AGMT_VEND  -->
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupAgreementListType">
+		<xs:sequence>
+			<xs:element name="CoverageReportingGroupAgreement" type="x2262:CoverageReportingGroupAgreementType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupAgreementType">
+		<xs:all>
+			<xs:element name="CoverageReportingGroupAgreementEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageReportingGroupAgreementEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="DentalMandatoryIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionAssignmentSequenceNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="HIPAAEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="HIPAAIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="LineOfBusinessCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PlanIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="PlanVersionIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="TierRequiredIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGRPTGGRPAGRMTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGRPTGGRPAGRMTssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupContractListType">
+		<xs:sequence>
+			<xs:element name="CoverageReportingGroupContract" type="x2262:CoverageReportingGroupContractType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupContractType">
+		<xs:all>
+			<xs:element name="ContractCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContractScopeOfBenefits" type="xs:string" minOccurs="0"/>
+			<xs:element name="ConttractType" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageReportingGroupContractEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageReportingGroupContractEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PolicyTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SPProgressiveCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGRPTGGRPCONTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGRPTGGRPCONTssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupSectionAlphaPrefixListType">
+		<xs:sequence>
+			<xs:element name="CoverageReportingGroupSectionAlphaPrefix" type="x2262:CoverageReportingGroupSectionAlphaPrefixType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupSectionAlphaPrefixType">
+		<xs:all>
+			<xs:element name="AlphaPrefixCode" type="xs:string"/>
+			<xs:element name="AlphaPrefixEffectiveDate" type="xs:string"/>
+			<xs:element name="AlphaPrefixEndDate" type="xs:string"/>
+			<xs:element name="COVRGRPTGGRPSECTALPHPFXSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGRPTGGRPSECTALPHPFXssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupSectionListType">
+		<xs:sequence>
+			<xs:element name="CoverageReportingGroupSection" type="x2262:CoverageReportingGroupSectionType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupSectionPayToDateType">
+		<xs:all>
+			<xs:element name="GroupNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="SectionNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="PayToDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="BillModeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="GracePeriodEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="GracePeriodDayCOde" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGRPTGGRPSECTPAYTODATESrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGRPTGGRPSECTPAYTODATEssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="CoverageReportingGroupSectionType">
+		<xs:all>
+			<xs:element name="ClientPartyKeyType" type="xs:string" minOccurs="0"/>
+			<!-- 'CLIENT','VMS CLIENT' etc.. -->
+			<xs:element name="ClientPartySourceKey" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="GroupNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="SectionNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupUserDisplayNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="SectionUserDisplayNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionName" type="xs:string" minOccurs="0"/>
+			<xs:element name="AlphaPrefixCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="BCPlanNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="BSPlanNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="BillingAccountReceivableSystemCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="BillingAccountReceivableSystemCodeEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ClientBillModeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ClientBusinessTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CurrentMarketingDistrictNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionContactName" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionGracePeriodCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="GracePeriodEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionCancelCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionCancelDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionHCSCLiabilityCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionOriginalEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="GroupSectionSupplementalCoverageIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberAsOfDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberAsOfDateTypeName" type="xs:string" minOccurs="0"/>
+			<xs:element name="NonRetensionGroupCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PriorBillingAccountReceivableEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PriorBillingAccountReceivableSystemCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="StudentCertificationFrequencyCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="StudentCertificationRequiredIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGRPTGGRPSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGRPTGGRPssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="COVRGRPTGGRPSECTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="COVRGRPTGGRPSECTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="CoverageReportingGroupContracts" type="x2262:CoverageReportingGroupContractListType" minOccurs="0"/>
+			<xs:element name="CoverageReportingGroupAgreements" type="x2262:CoverageReportingGroupAgreementListType" minOccurs="0"/>
+			<xs:element name="CoverageReportingGroupSectionAlphaPrefixes" type="x2262:CoverageReportingGroupSectionAlphaPrefixListType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="EmailType">
+		<xs:all>
+			<xs:element name="LocationUsageCode" type="xs:string" minOccurs="0"/>
+			<!-- LocationUsageCode: "LOCATION USAGE CODE" PR,SC -->
+			<xs:element name="UsageCode" type="xs:string" minOccurs="0"/>
+			<!-- UsageCode: "EMAIL USAGE CODE" ALL -->
+			<xs:element name="PreferenceCode" type="xs:string" minOccurs="0"/>
+			<!-- UsagePreferenceCode:  "PREFERENCE CODE" ! -->
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="Email" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddrSeqNbr" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYEMAILUSGSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYEMAILUSGssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="PTYEMAILUSGSrcLcts" type="xs:string" minOccurs="0"/>
+			<!-- Source last updated timestamp -->
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="EmailUsageListType">
+		<xs:sequence>
+			<xs:element name="Email" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="x2262:EmailType">
+							<xs:attribute name="useAuthorized">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value=""/>
+										<xs:enumeration value="Y"/>
+										<xs:enumeration value="N"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExclusionRiderListType">
+		<xs:sequence>
+			<xs:element name="ExclusionRider" type="x2262:ExclusionRiderType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExclusionRiderType">
+		<xs:all>
+			<xs:element name="WavierCode" type="xs:string"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="WavierSequenceNbr" type="xs:string" minOccurs="0"/>
+			<xs:element name="WavierRiderDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSHPEXCLNRIDRSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPEXCLNRIDRssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="ExtendedInfoType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="EmploymentStatus" type="x2262:EmploymentStatusType" minOccurs="0"/>
+			<xs:element name="Industry" type="xs:string" minOccurs="0"/>
+			<xs:element name="OccupationCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="JobTitle" type="xs:string" minOccurs="0"/>
+			<xs:element name="Intermediary" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberId" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProposalId" type="xs:int" minOccurs="0"/>
+			<xs:element name="QuoteId" type="xs:int" minOccurs="0"/>
+			<xs:element name="ExternalPlanId" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalCovType" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalRepCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalProducerCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalSourceCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalAgentCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="NimbusNum" type="xs:string" minOccurs="0"/>
+			<xs:element name="NimbusQuoteId" type="xs:string" minOccurs="0"/>
+			<xs:element name="AutoIssue" type="xs:string" minOccurs="0"/>
+			<xs:element name="PopulatedFromExternalLink" type="x2262:YesNoType" minOccurs="0"/>
+			<xs:element name="AgencyLeadNum" type="xs:int" minOccurs="0"/>
+			<xs:element name="FamilyGroupingCodeID" type="xs:int" minOccurs="0"/>
+			<xs:element name="WritingAgentNum" type="xs:int" minOccurs="0"/>
+			<xs:element name="SourceOfSaleID" type="xs:string" minOccurs="0"/>
+			<xs:element name="SoldWithOtherProdsFromSame" type="x2262:YesNoType" minOccurs="0"/>
+			<xs:element name="AssociationID" type="xs:int" minOccurs="0"/>
+			<xs:element name="AlternateAgentOfRecordID" type="xs:int" minOccurs="0"/>
+			<xs:element name="PhysicianCurrentPatient" type="xs:string" minOccurs="0"/>
+			<xs:element name="SpokenLanguage" minOccurs="0">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="languageCodeSetType" type="x2262:LanguageCodeSetType" use="optional"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SpokenLanguageAltCodeSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Spoken Language Code as defined in a different Language Code Set than "SpokenLanguage"</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="languageCodeSetType" type="x2262:LanguageCodeSetType" use="required"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SpokenLanguageOther" type="xs:string" minOccurs="0"/>
+			<xs:element name="WrittenLanguage" minOccurs="0">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="languageCodeSetType" type="x2262:LanguageCodeSetType" use="optional"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="WrittenLanguageAltCodeSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Written Language Code as defined in a different Language Code Set than "WrittenLanguage"</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="languageCodeSetType" type="x2262:LanguageCodeSetType" use="required"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="WrittenLanguageOther" type="xs:string" minOccurs="0"/>
+			<xs:element name="PrimaryRace" type="xs:string" minOccurs="0"/>
+			<xs:element name="PrimaryRaceOther" type="xs:string" minOccurs="0"/>
+			<xs:element name="EthnicBackground" type="xs:string" minOccurs="0"/>
+			<xs:element name="EthnicBackgroundOther" type="xs:string" minOccurs="0"/>
+			<xs:element name="Location" type="xs:string" minOccurs="0"/>
+			<xs:element name="Class" type="xs:string" minOccurs="0"/>
+			<xs:element name="HoursWorked" type="xs:string" minOccurs="0"/>
+			<xs:element name="Earning" type="xs:string" minOccurs="0"/>
+			<xs:element name="EarningType" type="xs:string" minOccurs="0"/>
+			<xs:element name="EarningEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EarningFrequency" type="x2262:FrequencyCodeType" minOccurs="0"/>
+			<xs:element name="EmployeeType" type="xs:string" minOccurs="0"/>
+			<xs:element name="EnrollmentStatus" type="xs:string" minOccurs="0"/>
+			<xs:element name="DateOfHire" type="xs:string" minOccurs="0"/>
+			<xs:element name="DateOfRehire" type="xs:string" minOccurs="0"/>
+			<xs:element name="DateOfRetirement" type="xs:string" minOccurs="0"/>
+			<xs:element name="DateOfQualifyingEvent" type="xs:string" minOccurs="0"/>
+			<xs:element name="DateOfSignature" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContactFirstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContactLastName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContactPhone" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContactPhoneExt" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContactEmailAddress" type="xs:string" minOccurs="0"/>
+			<xs:element name="ConfirmationNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="DependentType" type="xs:string" minOccurs="0"/>
+			<xs:element name="QualifyingEvent" type="xs:string" minOccurs="0"/>
+			<xs:element name="TaxIdNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="Dcn" type="xs:string" minOccurs="0"/>
+			<xs:element name="Ssn" type="xs:string" minOccurs="0"/>
+			<xs:element name="LicenseNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="SignatureDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalSystemId" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalCustomerId" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExternalPolicyId" type="xs:string" minOccurs="0"/>
+			<!-- Marketing Tracking -->
+			<xs:element name="CampaignId" type="xs:string" minOccurs="0"/>
+			<xs:element name="Acxiomci01" type="xs:string" minOccurs="0"/>
+			<xs:element name="Acxiomcht" type="xs:string" minOccurs="0"/>
+			<xs:element name="Impactradius" type="xs:string" minOccurs="0"/>
+			<xs:element name="CurrentPhysician" minOccurs="0">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="qualifier" use="optional">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="HMO"/>
+										<xs:enumeration value="NON_HMO"/>
+										<xs:enumeration value="SV"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PolicyIdStartDate" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Is the date coverage begins for the ExternalPolicyId as defined on the external system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PolicyIdEndDate" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Is the date coverage ends for the ExternalPolicyId as defined on the external system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="InterestedPartyListType">
+		<xs:sequence>
+			<xs:element name="InterestedParty" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="x2262:InterestedPartyType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InterestedPartyType">
+		<xs:all>
+			<xs:element name="PartyKeyType" type="xs:string"/>
+			<xs:element name="PartySourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="RelationshipCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CommunicationMethodTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PhoneNumberTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PhoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="Email" type="xs:string" minOccurs="0"/>
+			<xs:element name="ExchangeAssignedId" type="xs:string" minOccurs="0"/>
+			<xs:element name="INTRSTEDPTYSrcRecStsCd" type="xs:string"/>
+			<xs:element name="INTRSTEDPTYssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MemberDetails" type="x2262:MemberDetailType" minOccurs="0"/>
+			<xs:element name="Address" type="x2262:AddressType" minOccurs="0"/>
+			<xs:element name="PHIs" type="x2262:PHIListType" minOccurs="0"/>
+			<xs:element name="LastUpdateTS" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastChangeUserID" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContactUseAuthorized" minOccurs="0"/>
+			<xs:element name="EntityType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="KeyGroupType">
+		<xs:sequence>
+			<xs:element name="Key" minOccurs="2" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="Sequence" type="xs:int" use="required"/>
+							<xs:attribute name="Field" type="xs:string" use="required"/>
+							<xs:attribute name="delimeter" type="xs:string" default="^"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ManagedCareOrganizationEnrollmentTransferListType">
+		<xs:sequence>
+			<xs:element name="ManagedCareOrganizationEnrollmentTransfer" type="x2262:ManagedCareOrganizationEnrollmentTransferType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ManagedCareOrganizationEnrollmentTransferType">
+		<xs:all>
+			<xs:element name="TransferTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="TransferNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="TransferName" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MCOENROLMTXFERSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MCOENROLMTXFERssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicaidCareCoordinationListType">
+		<xs:sequence>
+			<xs:element name="MedicaidCareCoordination" type="x2262:MedicaidCareCoordinationType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicaidCareCoordinationType">
+		<xs:all>
+			<xs:element name="AssessmentTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="AssessmentDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="LevelCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="BeginningDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAIDCARECORDTNSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDCARECORDTNssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicaidCohortListType">
+		<xs:sequence>
+			<xs:element name="MedicaidCohort" type="x2262:MedicaidCohortType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicaidCohortType">
+		<xs:all>
+			<xs:element name="BehaviorHealthCohortCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="BehaviorHealthCohortRateAmount" type="xs:string" minOccurs="0"/>
+			<xs:element name="CohortCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CohortRateAmount" type="xs:string" minOccurs="0"/>
+			<xs:element name="TotalCohortRateAmount" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAIDCOHRTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDCOHRTssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicaidCoordinationOfBenefitListType">
+		<xs:sequence>
+			<xs:element name="MedicaidCoordinationOfBenefit" type="x2262:MedicaidCoordinationOfBenefitType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicaidCoordinationOfBenefitType">
+		<xs:all>
+			<xs:element name="MedicareContractNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicarePlanNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAIDCOBSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDCOBssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicaidLevelOfCareListType">
+		<xs:sequence>
+			<xs:element name="MedicaidLevelOfCare" type="x2262:MedicaidLevelOfCareType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicaidLevelOfCareType">
+		<xs:all>
+			<xs:element name="LevelOfCareCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAIDLVLOFCARESrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDLVLOFCAREssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicaidMaximumCopayListType">
+		<xs:sequence>
+			<xs:element name="MedicaidMaximumCopay" type="x2262:MedicaidMaximumCopayType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicaidMaximumCopayType">
+		<xs:all>
+			<xs:element name="MonthlyMaximumCopayAmount" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAIDMAXCPAYSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDMAXCPAYssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicaidNursingFacilityCareListType">
+		<xs:sequence>
+			<xs:element name="MedicaidNursingFacilityCare" type="x2262:MedicaidNursingFacilityCareType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicaidNursingFacilityCareType">
+		<xs:all>
+			<xs:element name="CareSettingCode" type="xs:string" minOccurs="0"/>
+			<!--hari-->
+			<xs:element name="CareSettingProviderIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="AssessmentDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SpanEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SpanEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAIDNRSGFCLTYCARESrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDNRSGFCLTYCAREssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicaidPatientLiabilityListType">
+		<xs:sequence>
+			<xs:element name="MedicaidPatientLiability" type="x2262:MedicaidPatientLiabilityType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicaidPatientLiabilityType">
+		<xs:all>
+			<xs:element name="PatientLiabilityAmount" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAIDPATLIABSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDPATLIABssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicareDetailListType">
+		<xs:sequence>
+			<xs:element name="Medicare" type="x2262:MedicareType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicarePartListType">
+		<xs:sequence>
+			<xs:element name="MedicarePart" type="x2262:MedicarePartType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicarePartType">
+		<xs:all>
+			<xs:element name="PartCode" type="xs:string"/>
+			<xs:element name="CarrierCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoveragePrecedenceCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAREPARTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAREPARTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRMCAREPARTSrcLcts" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicareReasonListType">
+		<xs:sequence>
+			<xs:element name="MedicareReason" type="x2262:MedicareReasonType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedicareReasonType">
+		<xs:all>
+			<xs:element name="Reason" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndStageRenalDiseaseCoordinationPeriodIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndStageRenalDiseaseCoordinationPeriodEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndStageRenalDiseaseCoordinationPeriodEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCARERSNSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCARERSNssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRMCARERSNSrcLcts" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MedicareType">
+		<xs:all>
+			<xs:element name="MemberCancelDate" type="xs:string" minOccurs="0"/>
+			<!-- Bluestar MEM.CAN_DT-->
+			<xs:element name="ThirdPartySourceKeyType" type="xs:string"/>
+			<xs:element name="ThirdPartySourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="HicNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="EmployeeStatusCode" type="xs:string" minOccurs="0"/>
+			<!-- "MEDICARE EMPLOYEE STATUS CODE" -->
+			<xs:element name="PrimarySourceCode" type="xs:string" minOccurs="0"/>
+			<!-- "MEDICARE PRIMARY SOURCE CODE" -->
+			<xs:element name="InformationSourceCode" type="xs:string" minOccurs="0"/>
+			<!-- "MEDICARE INFORMATION SOURCE CODE" -->
+			<xs:element name="EligibilityCode" type="xs:string" minOccurs="0"/>
+			<!-- "MEDICARE ELIGIBILITY CODE" -->
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicareCrossoverIndicator" type="xs:string"/>
+			<xs:element name="PrimarySourceCodeChangeDate" type="xs:string"/>
+			<xs:element name="MemberMedicareHistorySequenceNumber" type="xs:string"/>
+			<xs:element name="MedicareReasons" type="x2262:MedicareReasonListType" minOccurs="0"/>
+			<xs:element name="MedicareParts" type="x2262:MedicarePartListType" minOccurs="0"/>
+			<xs:element name="MBRTHRDPTYELIGSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRTHRDPTYELIGssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRTHRDPTYELIGSrcLcts" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberContactListType">
+		<xs:sequence>
+			<xs:element name="MemberContact" type="x2262:MemberContactType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberContactType">
+		<xs:all>
+			<xs:element name="PartyKeyType" type="xs:string" minOccurs="0"/>
+			<xs:element name="PartySourceKey" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="MemberNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Person_Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MemberCancelDate" type="xs:string" minOccurs="0"/>
+			<!-- Bluestar MEM.CAN_DT-->
+			<xs:element name="AddressUsages" type="x2262:AddressUsageListType" minOccurs="0"/>
+			<xs:element name="EmailUsages" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="x2262:EmailUsageListType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PhoneUsages" type="x2262:PhoneUsageListType" minOccurs="0"/>
+			<xs:element name="EnrolleeID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unique id assigned to members within the HPS Vendor application. 1st enrollee will be the applicant and others will be dependents of the applicant. Id begins with 0 for the applicant and increments by 1 for each member of the application. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberDetailType">
+		<xs:all>
+			<xs:element name="LastName" type="xs:string"/>
+			<xs:element name="FirstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="MiddleName" type="xs:string" minOccurs="0"/>
+			<xs:element name="PrefixName" type="xs:string" minOccurs="0"/>
+			<xs:element name="SuffixName" type="xs:string" minOccurs="0"/>
+			<xs:element name="TitleName" type="xs:string" minOccurs="0"/>
+			<xs:element name="MaidenName" type="xs:string" minOccurs="0"/>
+			<xs:element name="SourceFullName" type="xs:string" minOccurs="0"/>
+			<xs:element name="DateOfBirth" type="xs:string" minOccurs="0"/>
+			<xs:element name="DateOfDeath" type="xs:string" minOccurs="0"/>
+			<xs:element name="SocialSecurityNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="GenderCode" type="xs:string" minOccurs="0"/>
+			<!-- "GENDER CODE"-->
+			<xs:element name="MaritalStatus" type="xs:string" minOccurs="0"/>
+			<!-- "MARITAL STATUS CODE"-->
+			<xs:element name="EthnicTypeCode" type="xs:string" minOccurs="0"/>
+			<!-- "ETHNIC TYPE CODE" -->
+			<xs:element name="TribalAffiliateCode" type="xs:string" minOccurs="0"/>
+			<!-- "TRIBAL AFFILIATE CODE"-->
+			<xs:element name="SoundexLastName" type="xs:string" minOccurs="0"/>
+			<xs:element name="SoundexFirstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="HPSPersonCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Same as Enrollee ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExternalExchangeID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>3-17. Exchange Member ID </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberEventListType">
+		<xs:sequence>
+			<xs:element name="MemberEvent" type="x2262:MemberEventType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberEventType">
+		<xs:all>
+			<xs:element name="TypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Qualifying/Special event type code ex: 02=Birth</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CancelCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SignatureDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ActivationDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBREVNTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBREVNTssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberListType">
+		<xs:sequence>
+			<xs:element name="Member" type="x2262:MemberType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberMedicaidThirdPartyEligibilityListType">
+		<xs:sequence>
+			<xs:element name="MemberMedicaidThirdPartyEligibility" type="x2262:MemberMedicaidThirdPartyEligibilityType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberMedicaidThirdPartyEligibilityType">
+		<xs:all>
+			<xs:element name="MedicaidNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicaidEligibilityCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CapitationEntityCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="StateHouseHoldNumber" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="StateEligibilitySystemIdentifier" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="EnrollmentChangeReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberReimbursementLevelPlanCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberSubgroupCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberPlanCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CertificationDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EligibilityCategoryTerminationReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="DisabilityTypeCode" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="DisabilityTypeBeginDate" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="DisabilityTypeEndDate" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="NewReinstatetoMedicaidReceivedDate" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="NewbornReceivedDate" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="FACETClassCode" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="PartDOptOutIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicaidCoordinationOfBenefits" type="x2262:MedicaidCoordinationOfBenefitListType" minOccurs="0"/>
+			<xs:element name="ManagedCareOrganizationEnrollmentTransfers" type="x2262:ManagedCareOrganizationEnrollmentTransferListType" minOccurs="0"/>
+			<xs:element name="MedicaidCohorts" type="x2262:MedicaidCohortListType" minOccurs="0"/>
+			<xs:element name="MedicaidLevelOfCares" type="x2262:MedicaidLevelOfCareListType" minOccurs="0"/>
+			<xs:element name="MedicaidPatientLiabilities" type="x2262:MedicaidPatientLiabilityListType" minOccurs="0"/>
+			<xs:element name="MedicaidMaximumCopays" type="x2262:MedicaidMaximumCopayListType" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="MemberMedicaidWaivers" type="x2262:MemberMedicaidWaiverListType" minOccurs="0"/>
+			<xs:element name="MedicaidCareCoordinations" type="x2262:MedicaidCareCoordinationListType" minOccurs="0"/>
+			<xs:element name="MedicaidNursingFacilityCares" type="x2262:MedicaidNursingFacilityCareListType" minOccurs="0"/>
+			<xs:element name="MBRMCAIDTHRDPTYELIGSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDTHRDPTYELIGssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="THRDPTYssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberMedicaidWaiverListType">
+		<xs:sequence>
+			<xs:element name="MemberMedicaidWaiver" type="x2262:MemberMedicaidWaiverType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberMedicaidWaiverType">
+		<xs:all>
+			<xs:element name="WaiverCode" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="WaiverCodeEffectiveDate" type="xs:string" minOccurs="0"/>
+			<!--hari -->
+			<xs:element name="WaiverCodeEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="FACETClassCodeIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRMCAIDWAIVRSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRMCAIDWAIVRssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberQuestionnaireResponseListType">
+		<xs:sequence>
+			<xs:element name="MemberQuestionnaireResponse" type="x2262:MemberQuestionnaireResponseType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberQuestionnaireResponseType">
+		<xs:all>
+			<xs:element name="QSTNRRSPNSssnk" type="x2262:KeyGroupType"/>
+			<!-- to derive QSTNR_RSPNS_ID -->
+			<!-- to derive QSTNR_VRSN_PTY_ID use QSTNRVRSNPTYssnk from parent node-->
+			<xs:element name="ResponseText" type="xs:string" minOccurs="0"/>
+			<xs:element name="ResponseTS" type="xs:string" minOccurs="0"/>
+			<xs:element name="QSTNRQSTNPTYRSPNSSrcRecStsCd" type="xs:string"/>
+			<xs:element name="QSTNRQSTNPTYRSPNSssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberQuestionnaireVersionListType">
+		<xs:sequence>
+			<xs:element name="MemberQuestionnaireVersion" type="x2262:MemberQuestionnaireVersionType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberQuestionnaireVersionType">
+		<xs:all>
+			<xs:element name="QSTNRVRSNssnk" type="x2262:KeyGroupType"/>
+			<!-- to derive QSTNR_VRSN_ID -->
+			<xs:element name="EVNTssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<!-- to derive EVNT_ID -->
+			<xs:element name="CompletedByFirstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="CompletedByLastName" type="xs:string" minOccurs="0"/>
+			<xs:element name="CompletedByMiddleName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ReceivedTS" type="xs:string" minOccurs="0"/>
+			<xs:element name="CompletedDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastUpdatedDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="LanguageCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ResponseScoreNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberQuestionnaireResponses" type="x2262:MemberQuestionnaireResponseListType"/>
+			<xs:element name="QSTNRVRSNPTYSrcRecStsCd" type="xs:string"/>
+			<xs:element name="QSTNRVRSNPTYssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberRelationshipListType">
+		<xs:sequence>
+			<xs:element name="MemberRelationship" type="x2262:MemberRelationshipType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberRelationshipType">
+		<xs:all>
+			<xs:element name="RelationshipCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="DependentEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="DependentEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="TobaccoUsageCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageNumber" type="xs:string" minOccurs="0"/>
+			<!-- Sys80 RecordNumber-->
+			<xs:element name="DEPDTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="DEPDTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="RELSHPssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="DEPDTSrcLcts" type="xs:string"/>
+			<!-- MEM_DET_HIST_LCTS  -->
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MembershipCoverageElementListType">
+		<xs:sequence>
+			<xs:element name="MembershipCoverageElement" type="x2262:MembershipCoverageElementType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MembershipCoverageElementType">
+		<xs:all>
+			<xs:element name="Code" type="xs:string"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CoverageAgreementWaitingPeriods" type="x2262:CoverageAgreementWaitingPeriodListType" minOccurs="0"/>
+			<xs:element name="ExclusionRiders" type="x2262:ExclusionRiderListType" minOccurs="0"/>
+			<xs:element name="COVRGAGRMTELEssnk" type="x2262:KeyGroupType"/>
+			<!-- to derive COVRG_AGRMT_ELE_ID -->
+			<xs:element name="MBRSHPCOVRGELESrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPCOVRGELEssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRSHPCOVRGELESrcLcts" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MembershipCoverageGroupSectionListType">
+		<xs:sequence>
+			<xs:element name="MembershipCoverageGroupSection" type="x2262:MembershipCoverageGroupSectionType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MembershipCoverageGroupSectionType">
+		<xs:all>
+			<xs:element name="GroupNumber" type="xs:string"/>
+			<xs:element name="SectionNumber" type="xs:string"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndReasonCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Termination Reason Code </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaternityIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="PayThruDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PayToDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PendThruDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="DentalMandatoryIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubscriberIdNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubscriberIndicator" type="xs:string" minOccurs="0"/>
+			<!-- If (CMS_MEM_NBR = 0) then 'Y' else 'N' -->
+			<xs:element name="PaymentCoverageStatusCode" type="xs:string" minOccurs="0"/>
+			<!-- create MBR_SUB_ID only for subscriber, If (CMS_MEM_NBR = 0 and MEM_NBR <> 1) then populate mbr_sub_id  ( this logic is to capture SUBs whos MEM_NBR<>1 )-->
+			<xs:element name="MemberSubscriberIdentifiers" type="x2262:MemberSubscriberIdentifierListType" minOccurs="0"/>
+			<xs:element name="COVRGRPTGGRPSECTssnk" type="x2262:KeyGroupType"/>
+			<!-- to derive COVRG_RPTG_GRP_SECT_ID -->
+			<!-- to COVRG_AGRMT_ID, use ContractKeyTypeCode and ContractSourceKey from parent node -->
+			<!-- to MBR_ID, use PartyKeyType, PartySourceKey  from parent node -->
+			<xs:element name="MembershipTxSupplements" type="x2262:MembershipTxSupplementListType" minOccurs="0"/>
+			<xs:element name="MBRSHPCOVRGGRPSECTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPCOVRGGRPSECTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRSHPCOVRGGRPSECTSrcLcts" type="xs:string"/>
+			<xs:element name="GracePeriodStartDate" type="xs:string" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MembershipEnrollmentHistoryListType">
+		<xs:sequence>
+			<xs:element name="MembershipEnrollmentHistory" type="x2262:MembershipEnrollmentHistoryType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MembershipEnrollmentHistoryType">
+		<xs:all>
+			<xs:element name="MembershipEnrollmentCoverageEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberEventDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberEventTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SignatureDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberEventReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PreExistingConditionWaiverCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicalHistoryReceivedIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="LateEnrolleeIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="PremiumQuoteAmt" type="xs:string" minOccurs="0"/>
+			<xs:element name="PremiumQuoteDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSHPENROLMTHISTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPENROLMTHISTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRSHPENROLMTHISTSrcLcts" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MembershipEnrollmentListType">
+		<xs:sequence>
+			<xs:element name="MembershipEnrollment" type="x2262:MembershipEnrollmentType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MembershipEnrollmentTierListType">
+		<xs:sequence>
+			<xs:element name="MembershipEnrollmentTier" type="x2262:MembershipEnrollmentTierType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MembershipEnrollmentTierType">
+		<xs:all>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EnrollmentTierCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EnrollmentTierEndReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSHPENROLMTTIERSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPENROLMTTIERssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MembershipEnrollmentType">
+		<xs:all>
+			<xs:element name="PartyKeyType" type="xs:string"/>
+			<xs:element name="PartySourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="MemberNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Person Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ContractKeyTypeCode" type="xs:string"/>
+			<!-- Contract Type : ex "EPP COVERAGE AGREEMENT" -->
+			<xs:element name="ContractSourceKey" type="x2262:KeyGroupType"/>
+			<!-- Contract Key: ProductKey or plan-code -->
+			<xs:element name="COVRGAGRMTssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<!-- 12/1/2015: Added for datamatica eADW POC per Tanuja -->
+			<xs:element name="MemberCancelDate" type="xs:string" minOccurs="0"/>
+			<!-- Bluestar MEM.CAN_DT-->
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="RelationshipCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubscriberIndicator" type="xs:string" minOccurs="0"/>
+			<!--if MEM_NBR=1 then 'Y' else 'N'-->
+			<xs:element name="CoverageEndReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EnrollmentStatusCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A = Active
+C = Cobra
+S = Surviving Insured
+T = Tax Equity TERFA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LobCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MembershipIneligibleCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SupplimentalInsuranceCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CobraEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CobraEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="TierCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PremiumRateAreaCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="FederalPovertyLevelPercent" type="xs:string" minOccurs="0"/>
+			<xs:element name="EnrollmentMethodCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ApplicationTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>R-Renewal,N-New,P-Planchange,D</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ApplicationKeyType" type="xs:string" minOccurs="0"/>
+			<!--ApplicationKeyType: "CASENUMBER" -->
+			<xs:element name="ApplicationSourceKey" type="xs:string" minOccurs="0"/>
+			<!--ApplicationSourceKey: casenumber -->
+			<xs:element name="RenewalTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A = ACTIVE
+C = CMS
+H=HCSC
+N = NONE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="System80ActiveAccountIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="MarketHealthPlanID" type="xs:string" minOccurs="0"/>
+			<xs:element name="AgentNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="SourcePremiumRateAreaText" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberEventReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PreExistingConditionWaiverCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicalHistoryIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="LateEnrolleeIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="PremiumQuoteAmt" type="xs:string" minOccurs="0"/>
+			<xs:element name="PremiumQuoteDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MembershipCoverageGroupSections" type="x2262:MembershipCoverageGroupSectionListType" minOccurs="0"/>
+			<xs:element name="MembershipCoverageElements" type="x2262:MembershipCoverageElementListType" minOccurs="0"/>
+			<xs:element name="MembershipEnrollmentTiers" type="x2262:MembershipEnrollmentTierListType" minOccurs="0"/>
+			<xs:element name="MemberTypeEligibilities" type="x2262:MemberTypeEligibilityListType" minOccurs="0"/>
+			<xs:element name="Subsidies" type="x2262:SubsidyListType" minOccurs="0"/>
+			<xs:element name="MembershipEnrollmentHistories" type="x2262:MembershipEnrollmentHistoryListType" minOccurs="0"/>
+			<xs:element name="MBRSHPENROLMTSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPENROLMTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRSHPENROLMTSrcLcts" type="xs:string"/>
+			<xs:element name="ExchangeExternalID" type="xs:string" minOccurs="0"/>
+			<xs:element name="VendorCaseNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vendor Assigned Detail Level Case Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PreviousCoverageInd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If 'Y' is present this indicates the Application is comprised of coverage data from another system. (i.e. is conversion data)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="QualifiedHealthPlanID" minOccurs="0"/>
+			<xs:element name="maintenanceTypeCode" type="x2262:MaintenanceTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The EDI 834 "Maintenance Type Code", which is the action to be applied to this coverage. 021(add),001(change), 024(term/cancel), etc.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CoverageBroker" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="EffectiveDate"/>
+					<xs:attribute name="EndDate"/>
+					<xs:attribute name="NPNID"/>
+					<xs:attribute name="HPSBrokerNumber"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Seq" minOccurs="0"/>
+			<xs:element name="BC_Contract" minOccurs="0"/>
+			<xs:element name="BS_Contract" minOccurs="0"/>
+			<xs:element name="AlphaPrefix" minOccurs="0"/>
+			<xs:element name="EappNumber" minOccurs="0"/>
+			<xs:element name="ApplicationOrigin" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Application Origin:
+MAIL 
+FAXED 
+UPLOAD 
+EMAIL 
+EHEALTH 
+OSC 
+RETAIL 
+FLEX 
+TXFARMBUREAU 
+QUOTIT 
+FASTTRACK 
+GOHEALTH 
+EXTENDHEALTH </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppReceivedDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date Application was Received by HCSC. yyyy-mm-dd.  Will be same as Submitted date for ONX. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppSignatureDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Application signature date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VendorILBCaseNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vendor assigned ILB Level Case Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EnrolleeID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unique id assigned to members within the HPS Vendor application. 1st enrollee will be the applicant and others will be dependents of the applicant. Id begins with 0 for the applicant and increments by 1 for each member of the application. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MembershipProviderListType">
+		<xs:sequence>
+			<xs:element name="MembershipProvider" type="x2262:MembershipProviderType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MembershipProviderType">
+		<xs:all>
+			<xs:element name="PartyKeyType" type="xs:string"/>
+			<xs:element name="PartySourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="MemberNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Person Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ContractKeyTypeCode" type="xs:string"/>
+			<xs:element name="ContractSourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="MemberCancelDate" type="xs:string" minOccurs="0"/>
+			<!-- Bluestar MEM.CAN_DT-->
+			<xs:element name="SelectTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicalGroupNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="PcpaPcpNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="SelectionCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CancelCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MissingReasonCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PfinId" type="xs:string" minOccurs="0"/>
+			<xs:element name="NetworkCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubNetworkCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubSeqNbr" type="xs:string" minOccurs="0"/>
+			<xs:element name="NpiPcPNbr" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProvKeyType" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProviderPartySourceKey" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProviderSelectionCPOLocation" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProviderOverrideCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSHPENROLMTssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRSHPENROLMTPROVSELSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPENROLMTPROVSELssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRSHPENROLMTPROVSELSrcLcts" type="xs:string"/>
+			<xs:element name="npiPcp" type="xs:string"/>
+			<xs:element name="npiMg" type="xs:string" minOccurs="0"/>
+			<xs:element name="RequestReceivedDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EnrolleeID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unique id assigned to members within the HPS Vendor application. 1st enrollee will be the applicant and others will be dependents of the applicant. Id begins with 0 for the applicant and increments by 1 for each member of the application. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MembershipTrxType">
+		<xs:all>
+			<xs:element name="TransactionHeader" type="x2262:TransactionHeaderType"/>
+			<xs:element name="Client" type="x2262:ClientType" minOccurs="0"/>
+			<xs:element name="Members" type="x2262:MemberListType" minOccurs="0"/>
+			<xs:element name="MemberContacts" type="x2262:MemberContactListType" minOccurs="0"/>
+			<xs:element name="MembershipEnrollments" type="x2262:MembershipEnrollmentListType" minOccurs="0"/>
+			<xs:element name="MembershipProviders" type="x2262:MembershipProviderListType" minOccurs="0"/>
+			<xs:element name="SourcePartyKeyCrossReference" type="x2262:SourcePartyKeyCrossReferenceType" minOccurs="0"/>
+			<xs:element name="CoverageAgreements" type="x2262:CoverageAgreementListType" minOccurs="0"/>
+			<xs:element name="CoverageReportingGroupSections" type="x2262:CoverageReportingGroupSectionListType" minOccurs="0"/>
+			<xs:element name="CoverageReportingGroupSectionPayToDate" type="x2262:CoverageReportingGroupSectionPayToDateType" minOccurs="0"/>
+			<xs:element name="ClientBillingProfiles" type="x2262:ClientBillingProfileListType" minOccurs="0"/>
+			<xs:element name="InterestedParties" type="x2262:InterestedPartyListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Interested Party is the third party person or organization that represents another party.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="x2262:ActionInfo" minOccurs="0"/>
+			<xs:element ref="x2262:BrokerInfo" minOccurs="0"/>
+			<xs:element ref="x2262:EnrollmentInfo" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MembershipTxSupplementListType">
+		<xs:sequence>
+			<xs:element name="MembershipTxSupplement" type="x2262:MembershipTxSupplementType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MembershipTxSupplementType">
+		<xs:all>
+			<xs:element name="PCPEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicalGroupId" type="xs:string" minOccurs="0"/>
+			<xs:element name="PackageCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MedicareStatusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EmployeeStatusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PorgCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PosCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="CmsMemberNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSHPTXSUPPLSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPTXSUPPLssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberSubscriberIdentifierListType">
+		<xs:sequence>
+			<xs:element name="MemberSubscriberIdentifier" type="x2262:MemberSubscriberIdentifierType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberSubscriberIdentifierType">
+		<xs:all>
+			<xs:element name="SubscriberIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="SearchSubscriberIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="CMSSeqNbr" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSUBIDSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSUBIDssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="MBRSUBIDSrcLcts" type="xs:string"/>
+			<!-- SUB_DET_HIST_LCTS  -->
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberType">
+		<xs:all>
+			<xs:element name="EnrolleeID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unique id assigned to members within the HPS Vendor application. 1st enrollee will be the applicant and others will be dependents of the applicant. Id begins with 0 for the applicant and increments by 1 for each member of the application. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PartyKeyType" type="xs:string"/>
+			<xs:element name="PartySourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="MemberNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Person_Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ClientPartyKeyType" type="xs:string"/>
+			<!-- 'CLIENT','VMS CLIENT' etc.. -->
+			<xs:element name="ClientPartySourceKey" type="x2262:KeyGroupType"/>
+			<xs:element name="SubscriberIndicator" type="xs:string" minOccurs="0"/>
+			<!-- If PTY is Subscriber then 'Y' else 'N' -->
+			<xs:element name="SubscriberPartyKeyType" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubscriberPartySourceKey" type="x2262:KeyGroupType" minOccurs="0"/>
+			<!-- If PTY is Subscriber then 'SubscriberPartySourceKey=PartySourceKey' else 'will be different'  -->
+			<xs:element name="PermanentMemberNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="OriginalEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PartyEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PartyEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CobInd" type="xs:string" minOccurs="0"/>
+			<xs:element name="CobraInd" type="xs:string" minOccurs="0"/>
+			<xs:element name="MultiBirthCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="VipReasonCode" type="xs:string" minOccurs="0"/>
+			<!-- "VIP REASON CODE"-->
+			<xs:element name="PreferredCommunicationMethod" type="xs:string" minOccurs="0"/>
+			<!-- PrefferedCommunicationMethod: email, phone etc -->
+			<xs:element name="MemberClaimStopCode" type="xs:string" minOccurs="0"/>
+			<!-- "MEMBER CLAIM STOP CODE"-->
+			<xs:element name="MemberEndReasonCode" type="xs:string" minOccurs="0"/>
+			<!-- "MEMBER END REASON CODE"-->
+			<xs:element name="MemberDataRetentionCode" type="xs:string" minOccurs="0"/>
+			<!-- "MEMBER DATA RETENTION CODE"-->
+			<xs:element name="OptOutTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastUpdateTS" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastChangeUserID" type="xs:string" minOccurs="0"/>
+			<xs:element name="HippaEligibilityDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EmployeeIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="HireDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="ClientMemberIdentifier" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberConversionDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="MhsMemberNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="MilitaryCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MemberDetails" type="x2262:MemberDetailType" minOccurs="0"/>
+			<xs:element name="MemberRelationships" type="x2262:MemberRelationshipListType" minOccurs="0"/>
+			<!-- create MBR_SUB_ID only for subscriber-->
+			<xs:element name="MemberSubscriberIdentifiers" type="x2262:MemberSubscriberIdentifierListType" minOccurs="0"/>
+			<xs:element name="PreferredLanguageUsages" type="x2262:PreferredLanguageUsageListType" minOccurs="0"/>
+			<xs:element name="PTYKEYMGMTSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYNMSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<!-- applies to PKM, PTY, PTY_NM, MBR-->
+			<xs:element name="MedicareDetails" type="x2262:MedicareDetailListType" minOccurs="0"/>
+			<xs:element name="MemberEvents" type="x2262:MemberEventListType" minOccurs="0"/>
+			<xs:element name="MemberMedicaidThirdPartyEligibilities" type="x2262:MemberMedicaidThirdPartyEligibilityListType" minOccurs="0"/>
+			<xs:element name="MemberQuestionnaireVersions" type="x2262:MemberQuestionnaireVersionListType" minOccurs="0"/>
+			<xs:element name="SubMemberIMCs" type="x2262:SubMemberIMCListType" minOccurs="0"/>
+			<xs:element name="ExchangeSubscriberID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>3-16 HPS. Exchange Subscriber ID, required by HPS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExchangeMbrPremiumAmt" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>3-17. HPS.The total amount of Premium for the specific Enrollee (all coverages for that Enrollee added together).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AdditionalMaintenanceReason" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Code" type="xs:string" minOccurs="0"/>
+						<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+						<xs:element name="TerminationDate" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ITIN" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation> Individual Taxpayer Identification Number i</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RenewalFlag" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates what type of Renewal processing applies. P=Passive A=Active</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Signature" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SignatureName" type="xs:string"/>
+						<xs:element name="SignatureDate" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Contains Proxy Signature Date</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="SignatureIPAddress" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="enrolleeId" type="xs:int" use="required"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="maintReasonCode" type="xs:string" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="MemberTypeEligibilityListType">
+		<xs:sequence>
+			<xs:element name="MemberTypeEligibility" type="x2262:MemberTypeEligibilityType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MemberTypeEligibilityType">
+		<xs:all>
+			<xs:element name="MemberTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="AutoCancelIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="AgeLimitNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProductSelectionChoiceIndicator" type="xs:string" minOccurs="0"/>
+			<xs:element name="CancelTimingRuleCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRTYPELIGSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRTYPELIGssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="PartyLocationCharacteristicsListType">
+		<xs:sequence>
+			<xs:element name="PartyLocationCharacteristicType" type="x2262:PartyLocationCharacteristicType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartyLocationCharacteristicType">
+		<xs:all>
+			<xs:element name="PartyLocationCharacteristicCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PartyLocationCharacteristicValue" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYLOCCHARTCSrcRecStsCd" type="xs:string"/>
+			<xs:element name="PTYLOCCHARTCssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="PHIListType">
+		<xs:sequence>
+			<xs:element name="PHI" type="x2262:PHIType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PHIType">
+		<xs:all>
+			<xs:element name="SignatureFirstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="SignatureLasttName" type="xs:string" minOccurs="0"/>
+			<xs:element name="SignatureMiddleName" type="xs:string" minOccurs="0"/>
+			<xs:element name="PHIFormTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="PHIEffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PHIEndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PHIStatusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="RequestByCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="SignatureDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="PHISrcRecStsCd" type="xs:string"/>
+			<xs:element name="PHIssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="PhoneType">
+		<xs:all>
+			<xs:element name="LocationUsageCode" type="xs:string" minOccurs="0"/>
+			<!-- LocationUsageCode: "LOCATION USAGE CODE" PR,SC -->
+			<xs:element name="UsageCode" type="xs:string" minOccurs="0"/>
+			<!-- UsageCode: "TELEPHONE USAGE CODE" HOME, WORK, CELL, FAX, WORK, SPOUSE CELL, ETC -->
+			<xs:element name="PreferenceCode" type="xs:string" minOccurs="0"/>
+			<!-- UsagePreferenceCode: "PREFERENCE CODE" ! -->
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="Number" type="xs:string" minOccurs="0"/>
+			<xs:element name="Extension" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddrSeqNbr" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYPHNUSGSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYPHNUSGssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="PTYPHNUSGSrcLcts" type="xs:string" minOccurs="0"/>
+			<!-- Source last updated timestamp -->
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="PhoneUsageListType">
+		<xs:sequence>
+			<xs:element name="Phone" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="x2262:PhoneType">
+							<xs:attribute name="useAuthorized">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value=""/>
+										<xs:enumeration value="Y"/>
+										<xs:enumeration value="N"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PreferredLanguageType">
+		<xs:all>
+			<xs:element name="UsageCode" type="xs:string" minOccurs="0"/>
+			<!-- UsageCode is Mode: "LANGUAGE MODE CODE" SPK -->
+			<xs:element name="PreferenceCode" type="xs:string" minOccurs="0"/>
+			<!-- UsagePreferenceCode: "PREFERENCE CODE" !-->
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="LanguageCode" type="xs:string" minOccurs="0"/>
+			<!-- LanguageCode: "LANGUAGE CODE" ENG -->
+			<xs:element name="NativeLanguageInd" type="xs:string" minOccurs="0"/>
+			<xs:element name="AlternateMaterialFormatCode" type="xs:string" minOccurs="0"/>
+			<!-- AlternateMaterialFormatCode: "ALTERNATE MATERIAL FORMAT CODE" -->
+			<xs:element name="PTYLANGPREFMODESrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="PTYLANGPREFMODEssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="PreferredLanguageUsageListType">
+		<xs:sequence>
+			<xs:element name="PreferredLanguage" type="x2262:PreferredLanguageType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SourcePartyKeyCrossReferenceType">
+		<xs:all>
+			<xs:element name="PartyKeyType" type="xs:string" minOccurs="0"/>
+			<xs:element name="PartySourceKey" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="RelatedPartyKeyType" type="xs:string" minOccurs="0"/>
+			<xs:element name="RelatedPartySourceKey" type="x2262:KeyGroupType" minOccurs="0"/>
+			<xs:element name="SourcePartyId" type="xs:string" minOccurs="0"/>
+			<!-- MID -->
+			<xs:element name="RelatedSourcePartyId" type="xs:string" minOccurs="0"/>
+			<!-- mbr_id -->
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="CrossReferenceTypeName" type="xs:string" minOccurs="0"/>
+			<xs:element name="CrossReferenceMatchData" type="xs:string" minOccurs="0"/>
+			<xs:element name="StatusMethodName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ConfidenceLevelName" type="xs:string" minOccurs="0"/>
+			<xs:element name="SRCPTYKEYXREFSrcRecStsCd" type="xs:string" minOccurs="0"/>
+			<xs:element name="SRCPTYKEYXREFssnk" type="x2262:KeyGroupType" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="SubMemberIMCListType">
+		<xs:sequence>
+			<xs:element name="SubMemberIMC" type="x2262:SubMemberIMCType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubMemberIMCType">
+		<xs:all>
+			<xs:element name="GroupNumber" type="xs:string"/>
+			<xs:element name="SectionNumber" type="xs:string"/>
+			<xs:element name="SubscriberIdentifier" type="xs:string"/>
+			<xs:element name="IMCCode" type="xs:string"/>
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="COVRGRPTGGRPSECTssnk" type="x2262:KeyGroupType"/>
+			<!-- to derive COVRG_RPTG_GRP_SECT_ID -->
+			<xs:element name="SUBMBRIMCSrcRecStsCd" type="xs:string"/>
+			<xs:element name="SUBMBRIMCssnk" type="x2262:KeyGroupType"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="SubsidyListType">
+		<xs:sequence>
+			<xs:element name="Subsidies" type="x2262:SubsidyType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubsidyType">
+		<xs:all>
+			<xs:element name="TypeCode" type="xs:string"/>
+			<!-- TypeCode: SUBSIDY TYPE CODE" F, S -->
+			<xs:element name="Code" type="xs:string"/>
+			<!-- Code: "SUBSIDY CODE" APTC, CSR, F -->
+			<xs:element name="EffectiveDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="EndDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="Amount" type="xs:string" minOccurs="0"/>
+			<xs:element name="Percentage" type="xs:string" minOccurs="0"/>
+			<xs:element name="MBRSHPENROLMTSBSDYSrcRecStsCd" type="xs:string"/>
+			<xs:element name="MBRSHPENROLMTSBSDYssnk" type="x2262:KeyGroupType"/>
+			<xs:element name="EligibilityCriteria" type="xs:string" minOccurs="0"/>
+			<xs:element name="ACAFee" minOccurs="0"/>
+			<xs:element name="NonACAfee" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="TransactionHeaderType">
+		<xs:all>
+			<xs:element name="CtfTypeId" type="xs:string" fixed="2262"/>
+			<xs:element name="SourceLastUpdateTS" type="xs:string"/>
+			<xs:element name="ActionCode">
+				<xs:annotation>
+					<xs:documentation>I-Insert. Default.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceSystemName" type="xs:string"/>
+			<!-- SYS80, BLUESTAR, VMS, -->
+			<xs:element name="CorporateEntityCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>IL1
+MT1
+NM1
+OK1
+TX1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- "CORPORATE ENTITY CODE" VMS(I, N), Bluestar(IL1,NM1..) -->
+			<xs:element name="AccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubSeqNbr" type="xs:string" minOccurs="0"/>
+			<xs:element name="SubscriberIdNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Carrier assigned subscriber identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyCode" type="xs:string" minOccurs="0"/>
+			<!-- Sys80 -->
+			<!---->
+			<xs:element name="CreateDate" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date the Application was received.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KeyType"/>
+			<!--<xs:element name="AgentBrokerInfoold">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PartyKeyType" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="ClientPartySourceKey" type="x2262:KeyGroupType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="ID"/>
+						<xs:element name="BrokerEffectiveDate"/>
+						<xs:element name="BrokerTerminationDate"/>
+						<xs:element name="AffiliatedCode"/>
+						<xs:element name="TPAnumber"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>-->
+			<xs:element name="MessageID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unique Message ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Src_Rec_Typ_ID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Transaction Type ID ie. 1-Enrollment Change,2-Provider chagne etc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Src_Rec_Typ_ID_Descr" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Long description of the Source Record Type ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VendorTransactionID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>HPS Unique Transaction ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:simpleType name="ActionTypes">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="update_employee"/>
+			<xs:enumeration value="remove_employee"/>
+			<xs:enumeration value="cancel_employee"/>
+			<xs:enumeration value="add_dependent"/>
+			<xs:enumeration value="update_dependent"/>
+			<xs:enumeration value="remove_dependent"/>
+			<xs:enumeration value="add_coverage"/>
+			<xs:enumeration value="update_coverage"/>
+			<xs:enumeration value="remove_coverage"/>
+			<xs:enumeration value="update_plan_id"/>
+			<xs:enumeration value="update_named_data_point"/>
+			<xs:enumeration value="change_class"/>
+			<xs:enumeration value="change"/>
+			<xs:enumeration value="ins_audit"/>
+			<xs:enumeration value="hd_audit"/>
+			<xs:enumeration value="reinstate_employee"/>
+			<xs:enumeration value="reinstate_dependent"/>
+			<xs:enumeration value="reinstate_coverage"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MaintenanceTypeCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="001">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "Change"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "Delete"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="021">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "Add"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "Termination"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="025">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "Reinstatement"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="026">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "Correction"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="030">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "Audit"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="032">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "Employee Information Not Applicable"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:documentation>Added to handle 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- /////////////////////////////////////////////////////////////////// -->
+	<!-- ActionInfo . Processing Instructions-->
+	<!-- /////////////////////////////////////////////////////////////////// -->
+	<xs:simpleType name="EmploymentStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Employed"/>
+			<xs:enumeration value="Unemployed"/>
+			<xs:enumeration value="Retired"/>
+			<xs:enumeration value="Active">
+				<xs:annotation>
+					<xs:documentation>Identifies subscriber as active for non-group business</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="YesNoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="y"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="n"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LanguageCodeSetType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LD">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "NISO Z39.53 Language Codes"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LE">
+				<xs:annotation>
+					<xs:documentation>EDI 834 value for "ISO 639 Language Codes"</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FrequencyCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Weekly"/>
+			<xs:enumeration value="Biweekly"/>
+			<xs:enumeration value="Semimonthly"/>
+			<xs:enumeration value="Monthly"/>
+			<xs:enumeration value="Daily"/>
+			<xs:enumeration value="Annual"/>
+			<xs:enumeration value="TwoCalendarMonths"/>
+			<xs:enumeration value="LumpSumSeparationAllowance"/>
+			<xs:enumeration value="YearToDate"/>
+			<xs:enumeration value="Single"/>
+			<xs:enumeration value="Hourly"/>
+			<xs:enumeration value="Quarterly"/>
+			<xs:enumeration value="Semiannual"/>
+			<xs:enumeration value="Unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Transactional header -->
+	<!--
+PTY_KEY_MGMT
+PTY 
+PTY_NM 
+CLNT 
+-->
+	<!--
+PTY_KEY_MGMT
+PTY 
+PTY_NM 
+MBR 
+MBR_SUB_ID 
+-->
+	<!--<xs:complexType name="AgentBrokerType">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:long" minOccurs="0"/>
+			<xs:element name="PartyKeyType" type="xs:string" minOccurs="0"/>
+			<xs:element name="FFEID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Federally-Facilitated Exchange Broker ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BrokerAgentID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>HPS Broker/Agent ID number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NPNID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>National Insurance Producer Registry (NIPR) Broker ID (NPN).  FFM uses an NPN to send for the Broker/Agent ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TpaAccountNum" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Third Party Administrator Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>-->
+	<!--
+DEPDT
+-->
+	<!--
+MBR_SUB_ID
+-->
+	<!--
+MBR_THRD_PTY_ELIG
+-->
+	<!--
+MBR_MCARE_RSN
+-->
+	<!--
+MBR_MCARE_PART
+-->
+	<!--
+MBR_EVNT
+-->
+	<!--
+Contacts
+-->
+	<!--
+LOC
+PTY_LOC_USG
+PTY_LOC
+PTY_LOC_USG_FRGN_EXTNSN                                                                             
+-->
+	<!--
+PTY_LOC_CHARTC 
+-->
+	<!--
+PTY_EMAIL_USG
+-->
+	<!--
+PTY_PHN_USG
+-->
+	<!--
+PTY_LANG_PREF_MODE
+-->
+	<!--
+MBRSHP_ENROLMT		MEM_BEN
+-->
+	<!--
+MBRSHP_ENROLMT_HIST MEM_BEN_HIST
+-->
+	<!--
+MBR_TYP_ELIG
+-->
+	<!--
+MBRSHP_ENROLMT_TIER
+-->
+	<!--
+MBRSHP_COVRG_GRP_SECT	MEM_CMS_KEY
+-->
+	<!--
+SUB_MBR_IMC
+		<xs:element name="BcContract" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		<xs:element name="BsContract" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		<xs:element name="RxContract" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+-->
+	<!--
+MBRSHP_TX_SUPPL
+-->
+	<!--
+MBRSHP_COVRG_ELE	MEM_BEN_CVG
+-->
+	<!--
+MBRSHP_COVRG_ELE_WAITG_PRD	
+-->
+	<!--
+MBRSHP_EXCLN_RIDR	
+-->
+	<!--
+MBRSHP_ENROLMT_SBSDY
+-->
+	<!--
+MBRSHP_ENROLMT_PROV_SEL
+-->
+	<!--
+MBR_MCAID_THRD_PTY_ELIG
+MBR_MCAID_COB
+MCO_ENROLMT_XFER 
+MBR_MCAID_COHRT                                          
+MBR_MCAID_LVL_OF_CARE                                                           
+MBR_MCAID_PAT_LIAB                                                                            
+MBR_MCAID_MAX_CPAY
+MBR_MCAID_CARE_CORDTN
+MBR_MCAID_NRSG_FCLTY_CARE
+MBR_MCAID_WAIVR
+-->
+	<!--
+MBR_MCAID_COB
+-->
+	<!--
+MCO_ENROLMT_XFER
+-->
+	<!--
+MBR_MCAID_COHRT
+-->
+	<!--
+MBR_MCAID_LVL_OF_CARE
+-->
+	<!--
+MBR_MCAID_PAT_LIAB
+-->
+	<!--
+MBR_MCAID_MAX_CPAY
+-->
+	<!--
+MBR_MCAID_WAIVR
+-->
+	<!--
+MBR_MCAID_CARE_CORDTN
+-->
+	<!--
+MBR_MCAID_NRSG_FCLTY_CARE
+-->
+	<!--
+QSTNR_VRSN_PTY
+-->
+	<!--
+QSTNR_QSTN_PTY_RSPNS
+-->
+	<!--
+INTRSTED_PTY
+-->
+	<!--
+PHI
+-->
+	<!--
+SRC_PTY_KEY_XREF	
+-->
+	<!--
+CLNT_BILG_PRFL
+LB_PAYR_BILG_PRFL
+-->
+	<!--
+BEN_AGMT     CONTR_KEY_MGMT
+BEN_AGMT     COVRG_AGRMT
+-->
+	<!--
+BA_DET_HIST - COVRG_AGRMT_HIST
+-->
+	<!--
+BEN_AGMT     COVRG_AGRMT_RNWL_HIST
+-->
+	<!--
+COVRG_AGRMT_URE_RT - BEN_AGMT_URE_RT
+-->
+	<!--
+BEN_AGMT_CVG_PKG  - COVRG_AGRMT_PROD_COMPNT                                                                                   
+BEN_AGMT_VEND  - COVRG_AGRMT_PROD_COMPNT                                                                                   
+-->
+	<!--
+BEN_AGMT_PKG_DET - COVRG_AGRMT_PROD_COMPNT_CMPSTN
+-->
+	<!--
+-->
+	<!--
+CVG - COVRG_ELE
+BEN_AGMT_CVG - COVRG_AGRMT_ELE 
+-->
+	<!--
+BEN_AGMT_CVG_MC - COVRG_AGRMT_MCARE_ELE
+-->
+	<!--
+COVRG_ELE_DESCR
+-->
+	<!--
+COVRG_AGRMT_ELE_DESCR
+-->
+	<!--
+COVRG_RPTG_GRP_SECT_PD_TO_DT
+-->
+	<!--
+COVRG_RPTG_GRP
+COVRG_RPTG_GRP_SECT
+-->
+	<!--
+COVRG_RPTG_GRP_CONT - GRP_SECT_HIST 
+-->
+	<!--
+COVRG_RPTG_GRP_AGRMT - GS_BEN_AGMT
+-->
+	<!--
+COVRG_RPTG_GRP_SECT_ALPH_PFX - GRP_SECT & GS_DET_HIST 
+-->
+</xs:schema>
